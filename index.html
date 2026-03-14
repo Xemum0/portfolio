@@ -1,0 +1,2201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio — Youcef Mhammdi Bouzina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #080808;
+        --bg2: #0f0f0f;
+        --gold: #c9a96e;
+        --gold-light: #e8c98a;
+        --gold-dim: rgba(201, 169, 110, 0.15);
+        --white: #f0ebe3;
+        --muted: rgba(240, 235, 227, 0.45);
+        --border: rgba(201, 169, 110, 0.18);
+        --radius: 2px;
+
+        --duks: #f97316;
+        --duks-dim: rgba(249, 115, 22, 0.1);
+        --fitrigi: #2dd4a0;
+        --fitrigi-dim: rgba(45, 212, 160, 0.1);
+        --calmira: #7fb3f5;
+        --calmira-dim: rgba(127, 179, 245, 0.1);
+        --pass: #c9a96e;
+        --pass-dim: rgba(201, 169, 110, 0.12);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--white);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      /* CUSTOM CURSOR */
+      .cursor {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background: var(--gold);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition:
+          transform 0.05s,
+          width 0.2s,
+          height 0.2s,
+          opacity 0.2s;
+        mix-blend-mode: difference;
+      }
+      .cursor-ring {
+        position: fixed;
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(201, 169, 110, 0.5);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          transform 0.15s ease-out,
+          width 0.25s,
+          height 0.25s,
+          border-color 0.25s;
+      }
+      body.hovering .cursor-ring {
+        width: 56px;
+        height: 56px;
+        border-color: var(--gold);
+      }
+
+      /* NOISE OVERLAY */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 9998;
+      }
+
+      /* GRID LINES */
+      .grid-lines {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.04;
+        background-image:
+          linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: 80px 80px;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 28px 60px;
+        background: linear-gradient(
+          to bottom,
+          rgba(8, 8, 8, 0.9) 0%,
+          transparent 100%
+        );
+        backdrop-filter: blur(1px);
+      }
+      .nav-logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        font-weight: 300;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        gap: 40px;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 0 40px;
+        overflow: hidden;
+      }
+
+      .hero-bg-circle {
+        position: absolute;
+        width: 700px;
+        height: 700px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(201, 169, 110, 0.04) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .hero-line {
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        animation: fadeUp 1s 2.5s forwards;
+      }
+      .hero-line span {
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .scroll-arrow {
+        width: 1px;
+        height: 50px;
+        background: linear-gradient(to bottom, var(--gold), transparent);
+        animation: scrollPulse 2s infinite;
+      }
+
+      .hero-eyebrow {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 32px;
+        opacity: 0;
+        animation: fadeUp 0.8s 0.3s forwards;
+      }
+
+      .hero-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(4rem, 9vw, 9rem);
+        font-weight: 300;
+        line-height: 0.92;
+        text-align: center;
+        letter-spacing: -0.01em;
+        color: var(--white);
+        margin-bottom: 40px;
+      }
+      .hero-title em {
+        font-style: italic;
+        color: var(--gold-light);
+      }
+      .hero-title .line1 {
+        opacity: 0;
+        animation: fadeUp 0.9s 0.6s forwards;
+        display: block;
+      }
+      .hero-title .line2 {
+        opacity: 0;
+        animation: fadeUp 0.9s 0.9s forwards;
+        display: block;
+      }
+      .hero-title .line3 {
+        opacity: 0;
+        animation: fadeUp 0.9s 1.2s forwards;
+        display: block;
+      }
+
+      .hero-desc {
+        max-width: 480px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.8;
+        letter-spacing: 0.03em;
+        opacity: 0;
+        animation: fadeUp 0.9s 1.6s forwards;
+        margin-bottom: 60px;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 20px;
+        opacity: 0;
+        animation: fadeUp 0.9s 2s forwards;
+      }
+      .btn-gold {
+        padding: 14px 40px;
+        background: transparent;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        cursor: none;
+        text-decoration: none;
+        transition:
+          background 0.3s,
+          color 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn-gold::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gold);
+        transform: translateX(-101%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: -1;
+      }
+      .btn-gold:hover {
+        color: var(--bg);
+      }
+      .btn-gold:hover::before {
+        transform: translateX(0);
+      }
+      .btn-ghost {
+        padding: 14px 40px;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        cursor: none;
+        text-decoration: none;
+        transition:
+          border-color 0.3s,
+          color 0.3s;
+      }
+      .btn-ghost:hover {
+        border-color: var(--gold);
+        color: var(--white);
+      }
+
+      /* SECTION COMMON */
+      section {
+        position: relative;
+        z-index: 1;
+      }
+
+      .section-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        max-width: 120px;
+      }
+
+      /* STATS BAR */
+      .stats-bar {
+        padding: 60px;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+      }
+      .stat-item {
+        text-align: center;
+        padding: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.6s,
+          transform 0.6s;
+      }
+      .stat-item.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .stat-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3.5rem;
+        font-weight: 300;
+        color: var(--gold);
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .stat-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      /* WORKS SECTION */
+      .works {
+        padding: 140px 60px;
+      }
+      .works-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 100px;
+      }
+      .works-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.5rem, 5vw, 5rem);
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -0.01em;
+      }
+      .works-title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .works-count {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--muted);
+        letter-spacing: 0.2em;
+      }
+
+      /* APP CARD */
+      .app-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        margin-bottom: 2px;
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+        background: var(--bg2);
+      }
+      .app-card.visible {
+        opacity: 1;
+        transform: none;
+      }
+      .app-card:nth-child(even) {
+        direction: rtl;
+      }
+      .app-card:nth-child(even) > * {
+        direction: ltr;
+      }
+
+      .app-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      .card-duks::before {
+        background: radial-gradient(
+          circle at 70% 50%,
+          var(--duks-dim),
+          transparent 60%
+        );
+      }
+      .card-fitrigi::before {
+        background: radial-gradient(
+          circle at 30% 50%,
+          var(--fitrigi-dim),
+          transparent 60%
+        );
+      }
+      .card-calmira::before {
+        background: radial-gradient(
+          circle at 70% 50%,
+          var(--calmira-dim),
+          transparent 60%
+        );
+      }
+      .card-pass::before {
+        background: radial-gradient(
+          circle at 30% 50%,
+          var(--pass-dim),
+          transparent 60%
+        );
+      }
+      .app-card:hover::before {
+        opacity: 1;
+      }
+
+      .app-card-info {
+        padding: 80px 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .app-index {
+        font-family: "DM Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.35em;
+        color: var(--muted);
+        margin-bottom: 40px;
+      }
+
+      .app-category-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border: 1px solid;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 28px;
+        width: fit-content;
+      }
+      .tag-duks {
+        border-color: rgba(249, 115, 22, 0.4);
+        color: var(--duks);
+      }
+      .tag-fitrigi {
+        border-color: rgba(45, 212, 160, 0.4);
+        color: var(--fitrigi);
+      }
+      .tag-calmira {
+        border-color: rgba(127, 179, 245, 0.4);
+        color: var(--calmira);
+      }
+      .tag-pass {
+        border-color: rgba(201, 169, 110, 0.4);
+        color: var(--pass);
+      }
+
+      .app-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.2rem, 3.5vw, 3.8rem);
+        font-weight: 300;
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+        margin-bottom: 24px;
+        color: var(--white);
+      }
+      .app-name sup {
+        font-size: 0.5em;
+        vertical-align: super;
+        color: var(--gold);
+      }
+
+      .app-desc {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.85;
+        max-width: 380px;
+        margin-bottom: 50px;
+        letter-spacing: 0.01em;
+      }
+
+      .app-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 50px;
+      }
+      .app-features li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        letter-spacing: 0.03em;
+      }
+      .app-features li::before {
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .feat-duks li::before {
+        background: var(--duks);
+      }
+      .feat-fitrigi li::before {
+        background: var(--fitrigi);
+      }
+      .feat-calmira li::before {
+        background: var(--calmira);
+      }
+      .feat-pass li::before {
+        background: var(--pass);
+      }
+
+      .app-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .store-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 22px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        transition: all 0.3s;
+        cursor: none;
+      }
+      .store-btn:hover {
+        color: var(--white);
+        border-color: var(--gold);
+        background: rgba(201, 169, 110, 0.05);
+      }
+      .store-btn svg {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+
+      .app-card-visual {
+        position: relative;
+        overflow: hidden;
+        min-height: 540px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .visual-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.06;
+        transition:
+          opacity 0.5s,
+          transform 0.6s;
+      }
+      .app-card:hover .visual-bg {
+        opacity: 0.1;
+        transform: scale(1.04);
+      }
+
+      /* Fitrigi visual */
+      .fitrigi-visual {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .map-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(45, 212, 160, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(45, 212, 160, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+      .map-pin-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .pulse-ring {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border: 1px solid rgba(45, 212, 160, 0.3);
+        border-radius: 50%;
+        animation: pulse-expand 2.5s infinite;
+      }
+      .pulse-ring:nth-child(2) {
+        animation-delay: 0.8s;
+      }
+      .pulse-ring:nth-child(3) {
+        animation-delay: 1.6s;
+      }
+      .map-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(45, 212, 160, 0.1);
+        border: 1px solid rgba(45, 212, 160, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+      .map-icon svg {
+        width: 26px;
+        height: 26px;
+        color: var(--fitrigi);
+      }
+
+      /* Route lines */
+      .route-line {
+        position: absolute;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--fitrigi),
+          transparent
+        );
+        opacity: 0.3;
+        animation: routeFlow 3s infinite;
+      }
+      .route-line.r1 {
+        height: 140px;
+        top: 30%;
+        left: 30%;
+        transform: rotate(20deg);
+        animation-delay: 0s;
+      }
+      .route-line.r2 {
+        height: 100px;
+        top: 40%;
+        right: 30%;
+        transform: rotate(-15deg);
+        animation-delay: 1s;
+      }
+      .route-line.r3 {
+        height: 80px;
+        top: 55%;
+        left: 45%;
+        transform: rotate(5deg);
+        animation-delay: 2s;
+      }
+
+      /* Calmira visual */
+      .calmira-visual {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .health-rings {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .health-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1.5px solid;
+        animation: spin-ring 8s linear infinite;
+      }
+      .health-ring.r1 {
+        width: 180px;
+        height: 180px;
+        border-color: rgba(127, 179, 245, 0.2);
+        animation-duration: 12s;
+      }
+      .health-ring.r2 {
+        width: 130px;
+        height: 130px;
+        border-color: rgba(127, 179, 245, 0.35);
+        animation-duration: 8s;
+        animation-direction: reverse;
+      }
+      .health-ring.r3 {
+        width: 80px;
+        height: 80px;
+        border-color: rgba(127, 179, 245, 0.5);
+        animation-duration: 5s;
+      }
+      .health-center {
+        width: 48px;
+        height: 48px;
+        background: rgba(127, 179, 245, 0.1);
+        border: 1px solid rgba(127, 179, 245, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+      .health-center svg {
+        width: 22px;
+        height: 22px;
+        color: var(--calmira);
+      }
+
+      /* Floating health metrics */
+      .metric-bubble {
+        position: absolute;
+        background: rgba(127, 179, 245, 0.06);
+        border: 1px solid rgba(127, 179, 245, 0.2);
+        padding: 8px 14px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--calmira);
+        letter-spacing: 0.1em;
+        animation: float-metric 4s ease-in-out infinite;
+      }
+      .metric-bubble:nth-child(1) {
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+      .metric-bubble:nth-child(2) {
+        top: 30%;
+        right: 8%;
+        animation-delay: 1.3s;
+      }
+      .metric-bubble:nth-child(3) {
+        bottom: 25%;
+        left: 8%;
+        animation-delay: 2.6s;
+      }
+
+      /* PassSecurium visual */
+      .pass-visual {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .shield-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .shield-bg {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 169, 110, 0.06) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+      .shield-icon {
+        width: 90px;
+        height: 90px;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(201, 169, 110, 0.06);
+        border: 1px solid rgba(201, 169, 110, 0.25);
+      }
+      .shield-icon svg {
+        width: 44px;
+        height: 44px;
+        color: var(--gold);
+      }
+
+      /* Swiss cross accent */
+      .swiss-cross {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        opacity: 0.5;
+      }
+      .swiss-h,
+      .swiss-v {
+        position: absolute;
+        background: var(--gold);
+        border-radius: 1px;
+      }
+      .swiss-h {
+        width: 16px;
+        height: 5px;
+      }
+      .swiss-v {
+        width: 5px;
+        height: 16px;
+      }
+
+      /* Code dots animation */
+      .code-stream {
+        position: absolute;
+        right: 15%;
+        top: 20%;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        opacity: 0.3;
+      }
+      .code-dot-row {
+        display: flex;
+        gap: 5px;
+      }
+      .code-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--gold);
+        animation: code-blink 2s infinite;
+      }
+      .code-dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .code-dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .code-dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      .code-dot:nth-child(4) {
+        animation-delay: 0.6s;
+      }
+
+      /* TECH TAG BAR */
+      .tech-bar {
+        padding: 40px 60px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .tech-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-right: 8px;
+      }
+      .tech-tag {
+        padding: 5px 14px;
+        border: 1px solid var(--border);
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      /* ABOUT SECTION */
+      .about {
+        padding: 140px 60px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 100px;
+        border-top: 1px solid var(--border);
+      }
+      .about-left {
+      }
+      .about-right {
+      }
+      .about-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 4vw, 4.5rem);
+        font-weight: 300;
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+        margin-bottom: 40px;
+      }
+      .about-title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .about-text {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.9;
+        margin-bottom: 24px;
+      }
+      .about-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .skill-row {
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .skill-name {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        color: var(--white);
+      }
+      .skill-level {
+        display: flex;
+        gap: 4px;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+      }
+      .dot.filled {
+        background: var(--gold);
+        border-color: var(--gold);
+      }
+
+      /* CONTACT SECTION */
+      .contact {
+        padding: 140px 60px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+      .contact-eyebrow {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 40px;
+      }
+      .contact-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3rem, 6vw, 7rem);
+        font-weight: 300;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        margin-bottom: 60px;
+      }
+      .contact-title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .contact-links {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* FOOTER */
+      footer {
+        padding: 40px 60px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-brand {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 0.9rem;
+        letter-spacing: 0.15em;
+        color: var(--gold);
+      }
+      .footer-copy {
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        color: var(--muted);
+      }
+
+      /* MARQUEE */
+      .marquee-wrap {
+        overflow: hidden;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 20px 0;
+      }
+      .marquee-track {
+        display: flex;
+        gap: 60px;
+        animation: marquee 25s linear infinite;
+        white-space: nowrap;
+      }
+      .marquee-item {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        font-style: italic;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .marquee-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--gold);
+        flex-shrink: 0;
+      }
+
+      /* Duks Maps visual */
+      .duks-visual {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .terrain-lines {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .terrain-line {
+        position: absolute;
+        left: -10%;
+        width: 120%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(249, 115, 22, 0.15),
+          rgba(249, 115, 22, 0.3),
+          rgba(249, 115, 22, 0.15),
+          transparent
+        );
+        transform-origin: left center;
+      }
+      .terrain-line:nth-child(1) {
+        top: 30%;
+        transform: rotate(-8deg);
+      }
+      .terrain-line:nth-child(2) {
+        top: 42%;
+        transform: rotate(-5deg);
+        animation-delay: 0.5s;
+      }
+      .terrain-line:nth-child(3) {
+        top: 54%;
+        transform: rotate(-3deg);
+      }
+      .terrain-line:nth-child(4) {
+        top: 66%;
+        transform: rotate(-1deg);
+      }
+      .terrain-line:nth-child(5) {
+        top: 78%;
+        transform: rotate(1deg);
+      }
+      .compass-wrap {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .compass-outer {
+        width: 110px;
+        height: 110px;
+        border: 1px solid rgba(249, 115, 22, 0.25);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: spin-ring 20s linear infinite;
+        position: relative;
+      }
+      .compass-tick {
+        position: absolute;
+        width: 6px;
+        height: 1px;
+        background: rgba(249, 115, 22, 0.35);
+        top: 50%;
+        left: 0;
+        transform-origin: 55px 0;
+      }
+      .compass-inner {
+        width: 70px;
+        height: 70px;
+        border: 1px solid rgba(249, 115, 22, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+        background: rgba(249, 115, 22, 0.05);
+      }
+      .compass-needle {
+        width: 2px;
+        height: 28px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .needle-n {
+        width: 2px;
+        height: 14px;
+        background: linear-gradient(
+          to bottom,
+          var(--duks),
+          rgba(249, 115, 22, 0.4)
+        );
+        border-radius: 2px 2px 0 0;
+      }
+      .needle-s {
+        width: 2px;
+        height: 14px;
+        background: linear-gradient(
+          to bottom,
+          rgba(240, 235, 227, 0.2),
+          rgba(240, 235, 227, 0.05)
+        );
+        border-radius: 0 0 2px 2px;
+      }
+      .pin-float {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: float-metric 4s ease-in-out infinite;
+      }
+      .pin-float:nth-child(1) {
+        top: 18%;
+        left: 12%;
+        animation-delay: 0s;
+      }
+      .pin-float:nth-child(2) {
+        top: 25%;
+        right: 14%;
+        animation-delay: 1.5s;
+      }
+      .pin-float:nth-child(3) {
+        bottom: 20%;
+        left: 16%;
+        animation-delay: 2.8s;
+      }
+      .pin-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        background: var(--duks);
+        opacity: 0.6;
+        margin-bottom: 2px;
+      }
+      .pin-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.55rem;
+        color: rgba(249, 115, 22, 0.6);
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+      }
+      .users-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(249, 115, 22, 0.08);
+        border: 1px solid rgba(249, 115, 22, 0.3);
+        padding: 8px 16px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.62rem;
+        color: var(--duks);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .client-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 18px;
+      }
+      .client-badge::before {
+        content: "Client";
+        padding: 3px 8px;
+        border: 1px solid var(--border);
+        color: var(--gold);
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+      }
+
+      /* KEYFRAMES */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes scrollPulse {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scaleY(0.7);
+          transform-origin: top;
+        }
+        50% {
+          opacity: 1;
+          transform: scaleY(1);
+          transform-origin: top;
+        }
+      }
+      @keyframes pulse-expand {
+        0% {
+          transform: scale(0.6);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(2.2);
+          opacity: 0;
+        }
+      }
+      @keyframes spin-ring {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes float-metric {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes code-blink {
+        0%,
+        100% {
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      @keyframes routeFlow {
+        0%,
+        100% {
+          opacity: 0.1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        nav {
+          padding: 20px 24px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .stats-bar {
+          grid-template-columns: 1fr 1fr;
+          padding: 40px 24px;
+        }
+        .works {
+          padding: 80px 24px;
+        }
+        .works-header {
+          flex-direction: column;
+          gap: 20px;
+          align-items: flex-start;
+          margin-bottom: 60px;
+        }
+        .app-card {
+          grid-template-columns: 1fr;
+        }
+        .app-card:nth-child(even) {
+          direction: ltr;
+        }
+        .app-card-visual {
+          min-height: 280px;
+          order: -1;
+        }
+        .app-card-info {
+          padding: 50px 30px;
+        }
+        .about {
+          grid-template-columns: 1fr;
+          padding: 80px 24px;
+          gap: 60px;
+        }
+        .contact {
+          padding: 80px 24px;
+        }
+        .tech-bar {
+          padding: 30px 24px;
+        }
+        footer {
+          padding: 30px 24px;
+          flex-direction: column;
+          gap: 12px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- GRID -->
+    <div class="grid-lines"></div>
+
+    <!-- NAV -->
+    <nav>
+      <a href="#" class="nav-logo">Youcef M.B.</a>
+      <ul class="nav-links">
+        <li><a href="#works">Works</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg-circle"></div>
+      <p class="hero-eyebrow">— Mobile App Developer &amp; Product Engineer</p>
+      <h1 class="hero-title">
+        <span class="line1">Crafting</span>
+        <span class="line2"><em>Digital</em></span>
+        <span class="line3">Experiences</span>
+      </h1>
+      <p class="hero-desc">
+        I build refined, purposeful applications for ambitious clients — from
+        ride-hailing platforms and travel guides to AI health companions and
+        Swiss-grade security tools.
+      </p>
+      <div class="hero-cta">
+        <a href="#works" class="btn-gold">View My Work</a>
+        <a href="#contact" class="btn-ghost">Get In Touch</a>
+      </div>
+      <div class="hero-line">
+        <span>Scroll</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar" id="stats">
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Apps Launched</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100k</div>
+        <div class="stat-label">Users Reached</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Industries</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Ambition</div>
+      </div>
+    </div>
+
+    <!-- MARQUEE -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <span class="marquee-item"
+          >Algeria Travel Guide<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Ride Hailing<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >AI Health<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Cybersecurity<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >iOS Development<span class="marquee-dot"></span
+        ></span>
+        <span class="marquec-item"
+          >Android Development<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Product Design<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Swiss Engineering<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Algeria Travel Guide<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Ride Hailing<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >AI Health<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Cybersecurity<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >iOS Development<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Android Development<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Product Design<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Swiss Engineering<span class="marquee-dot"></span
+        ></span>
+      </div>
+    </div>
+
+    <!-- WORKS -->
+    <section class="works" id="works">
+      <div class="works-header">
+        <div>
+          <div class="section-label">Client Work</div>
+          <h2 class="works-title">Featured<br /><em>Applications</em></h2>
+        </div>
+        <span class="works-count">004 Projects</span>
+      </div>
+
+      <!-- DUKS MAPS -->
+      <div class="app-card card-duks">
+        <div class="app-card-visual">
+          <div class="duks-visual">
+            <div class="terrain-lines">
+              <div class="terrain-line"></div>
+              <div class="terrain-line"></div>
+              <div class="terrain-line"></div>
+              <div class="terrain-line"></div>
+              <div class="terrain-line"></div>
+            </div>
+            <div class="pin-float">
+              <div class="pin-dot"></div>
+              <span class="pin-label">Tassili</span>
+            </div>
+            <div class="pin-float">
+              <div class="pin-dot"></div>
+              <span class="pin-label">Hoggar</span>
+            </div>
+            <div class="pin-float">
+              <div class="pin-dot"></div>
+              <span class="pin-label">Tipaza</span>
+            </div>
+            <div class="users-badge">100 000+ Users</div>
+            <div class="compass-wrap">
+              <div class="compass-outer">
+                <div
+                  class="compass-tick"
+                  style="transform: rotate(0deg) translateX(47px)"
+                ></div>
+                <div
+                  class="compass-tick"
+                  style="transform: rotate(45deg) translateX(47px)"
+                ></div>
+                <div
+                  class="compass-tick"
+                  style="transform: rotate(90deg) translateX(47px)"
+                ></div>
+                <div
+                  class="compass-tick"
+                  style="transform: rotate(135deg) translateX(47px)"
+                ></div>
+                <div
+                  class="compass-tick"
+                  style="transform: rotate(180deg) translateX(47px)"
+                ></div>
+                <div
+                  class="compass-tick"
+                  style="transform: rotate(225deg) translateX(47px)"
+                ></div>
+                <div
+                  class="compass-tick"
+                  style="transform: rotate(270deg) translateX(47px)"
+                ></div>
+                <div
+                  class="compass-tick"
+                  style="transform: rotate(315deg) translateX(47px)"
+                ></div>
+                <div class="compass-inner">
+                  <div class="compass-needle">
+                    <div class="needle-n"></div>
+                    <div class="needle-s"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app-card-info">
+          <div class="app-index">01 / 04</div>
+          <div class="client-badge">Boulouza Nasser</div>
+          <span class="app-category-tag tag-duks">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              width="12"
+              height="12"
+            >
+              <path
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            Travel &amp; Exploration
+          </span>
+          <h3 class="app-name">Duks<br />Maps</h3>
+          <p class="app-desc">
+            Algeria's most-loved travel guide — explore the country's most
+            breathtaking destinations curated by the iconic influencer Duks.
+            From the Saharan dunes of Tassili to the Roman ruins of Tipaza,
+            discover Algeria like never before.
+          </p>
+          <ul class="app-features feat-duks">
+            <li>
+              Curated hidden gems &amp; iconic destinations across Algeria
+            </li>
+            <li>Offline-ready maps for remote exploration</li>
+            <li>Insider guides by Duks — Algeria's top travel influencer</li>
+            <li>4.9★ rating · 418 reviews · 100 000+ active users</li>
+            <li>Available on iOS &amp; Android</li>
+          </ul>
+          <div class="app-links">
+            <a
+              href="https://apps.apple.com/dz/app/duks-maps/id6746637175?l=ar"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                />
+              </svg>
+              App Store
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.duks.app&hl=fr"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M3.18 23.76c.3.17.66.19.99.04l13.18-7.61-2.89-2.89-11.28 10.46zM.5 1.29C.19 1.65 0 2.19 0 2.9v18.2c0 .71.19 1.25.51 1.6l.08.08 10.19-10.19v-.24L.58 1.21l-.08.08zM20.37 10.43l-2.76-1.59-3.23 3.23 3.23 3.23 2.77-1.6c.79-.46.79-1.22-.01-1.68l-.0-.59zM3.18.24L16.36 7.85 13.47 10.74 2.19.28C2.52.12 2.88.07 3.18.24z"
+                />
+              </svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FITRIGI -->
+      <div class="app-card card-fitrigi">
+        <div class="app-card-info">
+          <div class="app-index">02 / 04</div>
+          <div class="client-badge">Ayoub Benderdouch</div>
+          <span class="app-category-tag tag-fitrigi">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              width="12"
+              height="12"
+            >
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+              />
+              <circle cx="12" cy="9" r="2.5" />
+            </svg>
+            Travel &amp; Transport
+          </span>
+          <h3 class="app-name">Fitrigi<br />Ride</h3>
+          <p class="app-desc">
+            A full-stack ride hailing solution connecting passengers with
+            reliable drivers in seconds. Built with a unique bidding system that
+            eliminates surge pricing and puts riders in full control of their
+            journey.
+          </p>
+          <ul class="app-features feat-fitrigi">
+            <li>Instant booking with fare bidding system</li>
+            <li>Multi-vehicle options: cars, bikes, jeeps &amp; SUVs</li>
+            <li>Real-time GPS tracking &amp; driver location</li>
+            <li>Transparent, surge-free pricing</li>
+            <li>Available on iOS &amp; Android</li>
+          </ul>
+          <div class="app-links">
+            <a
+              href="https://apps.apple.com/dz/app/fitrigi/id6756182620?l=ar"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                />
+              </svg>
+              App Store
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.fitrigi.Ride&hl=fr"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M3.18 23.76c.3.17.66.19.99.04l13.18-7.61-2.89-2.89-11.28 10.46zM.5 1.29C.19 1.65 0 2.19 0 2.9v18.2c0 .71.19 1.25.51 1.6l.08.08 10.19-10.19v-.24L.58 1.21l-.08.08zM20.37 10.43l-2.76-1.59-3.23 3.23 3.23 3.23 2.77-1.6c.79-.46.79-1.22-.01-1.68l-.0-.59zM3.18.24L16.36 7.85 13.47 10.74 2.19.28C2.52.12 2.88.07 3.18.24z"
+                />
+              </svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+        <div class="app-card-visual">
+          <div class="fitrigi-visual">
+            <div class="map-grid"></div>
+            <div class="route-line r1"></div>
+            <div class="route-line r2"></div>
+            <div class="route-line r3"></div>
+            <div class="map-pin-container">
+              <div class="pulse-ring"></div>
+              <div class="pulse-ring"></div>
+              <div class="pulse-ring"></div>
+              <div class="map-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                  />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+              </div>
+            </div>
+            <!-- mini car icons -->
+            <svg
+              style="
+                position: absolute;
+                top: 25%;
+                left: 20%;
+                opacity: 0.25;
+                animation: float-metric 5s ease-in-out infinite;
+              "
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2dd4a0"
+              stroke-width="1.2"
+            >
+              <rect x="2" y="8" width="20" height="9" rx="2" />
+              <path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2" />
+              <circle cx="7" cy="17" r="1.5" />
+              <circle cx="17" cy="17" r="1.5" />
+            </svg>
+            <svg
+              style="
+                position: absolute;
+                bottom: 25%;
+                right: 22%;
+                opacity: 0.2;
+                animation: float-metric 4s ease-in-out infinite 2s;
+              "
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#2dd4a0"
+              stroke-width="1.2"
+            >
+              <rect x="2" y="8" width="20" height="9" rx="2" />
+              <path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2" />
+              <circle cx="7" cy="17" r="1.5" />
+              <circle cx="17" cy="17" r="1.5" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- CALMIRA -->
+      <div class="app-card card-calmira">
+        <div class="app-card-visual">
+          <div class="calmira-visual">
+            <div class="metric-bubble">❤ 72 bpm</div>
+            <div class="metric-bubble">🩸 120/80</div>
+            <div class="metric-bubble">💊 Rx Active</div>
+            <div class="health-rings">
+              <div class="health-ring r1"></div>
+              <div class="health-ring r2"></div>
+              <div class="health-ring r3"></div>
+              <div class="health-center">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.792 4.068 2 6.281 2c1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447C20.266 2.01 23 3.791 23 7.191c0 4.069-5.136 8.625-11 14.402z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app-card-info">
+          <div class="app-index">03 / 04</div>
+          <div class="client-badge">Mohamed Al-Rahawan</div>
+          <span class="app-category-tag tag-calmira">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              width="12"
+              height="12"
+            >
+              <path
+                d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.792 4.068 2 6.281 2c1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447C20.266 2.01 23 3.791 23 7.191c0 4.069-5.136 8.625-11 14.402z"
+              />
+            </svg>
+            Health &amp; Medical
+          </span>
+          <h3 class="app-name">Calmira</h3>
+          <p class="app-desc">
+            Your personal AI health companion — a secure vault for all your
+            medical information. From lab results to medication tracking,
+            Calmira brings clarity and calm to navigating your health journey.
+          </p>
+          <ul class="app-features feat-calmira">
+            <li>Secure storage of medical records &amp; lab results</li>
+            <li>Track conditions, medications &amp; prescriptions</li>
+            <li>AI-powered health insights &amp; companion</li>
+            <li>Private health history at your fingertips</li>
+            <li>Designed for iPad &amp; iPhone</li>
+          </ul>
+          <div class="app-links">
+            <a
+              href="https://apps.apple.com/dz/app/calmira/id6759220647?l=ar"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                />
+              </svg>
+              App Store
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSSECURIUM -->
+      <div class="app-card card-pass">
+        <div class="app-card-info">
+          <div class="app-index">04 / 04</div>
+          <div class="client-badge">Alpeinsoft · Switzerland</div>
+          <span class="app-category-tag tag-pass">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              width="12"
+              height="12"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Security &amp; Privacy
+          </span>
+          <h3 class="app-name">PassSecurium<sup>™</sup></h3>
+          <p class="app-desc">
+            Swiss-engineered password security, built on the principles of
+            precision and trust. PassSecurium™ protects your digital identity
+            with military-grade encryption crafted to the exacting standards
+            Switzerland is known for.
+          </p>
+          <ul class="app-features feat-pass">
+            <li>Military-grade encryption &amp; Swiss security standards</li>
+            <li>Secure password generation &amp; autofill</li>
+            <li>Encrypted vault with zero-knowledge architecture</li>
+            <li>Cross-platform: iOS &amp; Android</li>
+            <li>Developed by Alpeinsoft, Switzerland</li>
+          </ul>
+          <div class="app-links">
+            <a
+              href="https://apps.apple.com/dz/app/passsecurium-password-manager/id1159065748?l=ar"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                />
+              </svg>
+              App Store
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=ch.alpeinsoft.passsecurium.abo&hl=fr"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M3.18 23.76c.3.17.66.19.99.04l13.18-7.61-2.89-2.89-11.28 10.46zM.5 1.29C.19 1.65 0 2.19 0 2.9v18.2c0 .71.19 1.25.51 1.6l.08.08 10.19-10.19v-.24L.58 1.21l-.08.08zM20.37 10.43l-2.76-1.59-3.23 3.23 3.23 3.23 2.77-1.6c.79-.46.79-1.22-.01-1.68l-.0-.59zM3.18.24L16.36 7.85 13.47 10.74 2.19.28C2.52.12 2.88.07 3.18.24z"
+                />
+              </svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+        <div class="app-card-visual">
+          <div class="pass-visual">
+            <div class="shield-bg"></div>
+            <div class="swiss-cross">
+              <div class="swiss-h"></div>
+              <div class="swiss-v"></div>
+            </div>
+            <div class="code-stream">
+              <div class="code-dot-row">
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+              </div>
+              <div class="code-dot-row">
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+              </div>
+              <div class="code-dot-row">
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+              </div>
+            </div>
+            <div class="shield-container">
+              <div class="shield-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="M9 12l2 2 4-4" stroke-width="1.2" />
+                </svg>
+              </div>
+            </div>
+            <!-- floating lock -->
+            <svg
+              style="
+                position: absolute;
+                top: 20%;
+                left: 15%;
+                opacity: 0.18;
+                animation: float-metric 6s ease-in-out infinite;
+              "
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#c9a96e"
+              stroke-width="1"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+            <svg
+              style="
+                position: absolute;
+                bottom: 22%;
+                right: 15%;
+                opacity: 0.15;
+                animation: float-metric 5s ease-in-out infinite 1.5s;
+              "
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#c9a96e"
+              stroke-width="1"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH BAR -->
+    <div class="tech-bar">
+      <span class="tech-label">Stack —</span>
+      <span class="tech-tag">React js</span>
+      <span class="tech-tag">Flutter</span>
+      <span class="tech-tag">Nest js </span>
+      <span class="tech-tag">python ML , LLM</span>
+      <span class="tech-tag">Node.js</span>
+      <span class="tech-tag">Firebase</span>
+      <span class="tech-tag">Google Maps API</span>
+      <span class="tech-tag">AES Encryption</span>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="about-left">
+        <div class="section-label">Who I Am</div>
+        <h2 class="about-title">Building for<br /><em>Clients</em></h2>
+        <p class="about-text">
+          I'm Youcef Mhammdi Bouzina — a mobile developer who turns ambitious
+          ideas into polished, production-ready applications. I work with
+          founders and entrepreneurs to bring their vision to life across iOS
+          and Android.
+        </p>
+        <p class="about-text">
+          From guiding 100k explorers across Algeria with Duks Maps, to powering
+          rides with Fitrigi, supporting patients with Calmira, and locking down
+          digital security with Swiss-made PassSecurium — each project is built
+          with precision and purpose.
+        </p>
+        <a
+          href="#contact"
+          class="btn-gold"
+          style="margin-top: 20px; display: inline-block"
+          >Let's Build Something</a
+        >
+      </div>
+      <div class="about-right">
+        <div class="section-label">Expertise</div>
+        <div class="skill-row">
+          <span class="skill-name">Mobile Development</span>
+          <div class="skill-level">
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Product Design</span>
+          <div class="skill-level">
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Backend Architecture</span>
+          <div class="skill-level">
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">App Security</span>
+          <div class="skill-level">
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">AI Integration</span>
+          <div class="skill-level">
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <p class="contact-eyebrow">— Let's Talk</p>
+      <h2 class="contact-title">Have an<br /><em>Idea?</em></h2>
+      <div class="contact-links">
+        <a href="mailto:youcefmhammdibouzina@gmail.com" class="btn-gold"
+          >Send a Message</a
+        >
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">Youcef Mhammdi Bouzina</div>
+      <div class="footer-copy">© 2025 — All rights reserved</div>
+    </footer>
+
+    <script>
+      // Cursor
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("cursorRing");
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+      });
+
+      function animateCursor() {
+        cursor.style.left = mx + "px";
+        cursor.style.top = my + "px";
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.left = rx + "px";
+        ring.style.top = ry + "px";
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      document
+        .querySelectorAll("a, button, .store-btn, .btn-gold, .btn-ghost")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () =>
+            document.body.classList.add("hovering"),
+          );
+          el.addEventListener("mouseleave", () =>
+            document.body.classList.remove("hovering"),
+          );
+        });
+
+      // Scroll reveal
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              if (e.target.classList.contains("stat-item")) {
+                const num = e.target.querySelector(".stat-num");
+                const val = num.textContent;
+                if (!isNaN(val)) animateCount(num, parseInt(val));
+              }
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+
+      document
+        .querySelectorAll(".app-card, .stat-item")
+        .forEach((el) => observer.observe(el));
+
+      function animateCount(el, target) {
+        let start = 0;
+        const dur = 1200;
+        const step = (timestamp) => {
+          if (!start) start = timestamp;
+          const progress = Math.min((timestamp - start) / dur, 1);
+          el.textContent = Math.floor(progress * target);
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = target;
+        };
+        requestAnimationFrame(step);
+      }
+
+      // Stagger stat items
+      document.querySelectorAll(".stat-item").forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.1}s`;
+      });
+    </script>
+  </body>
+</html>
