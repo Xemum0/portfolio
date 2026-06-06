@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=DM+Sans:wght@300;400;500&amp;family=DM+Mono:wght@300;400&amp;display=swap"
       rel="stylesheet"
     />
 
@@ -31,6 +31,12 @@
         --calmira-dim: rgba(127, 179, 245, 0.1);
         --pass: #c9a96e;
         --pass-dim: rgba(201, 169, 110, 0.12);
+        --swiga: #a3e635;
+        --swiga-dim: rgba(163, 230, 53, 0.1);
+        --bricoram: #f43f5e;
+        --bricoram-dim: rgba(244, 63, 94, 0.1);
+        --change: #22d3ee;
+        --change-dim: rgba(34, 211, 238, 0.1);
       }
 
       *,
@@ -208,6 +214,68 @@
         height: 50px;
         background: linear-gradient(to bottom, var(--gold), transparent);
         animation: scrollPulse 2s infinite;
+      }
+
+      .hero-profile {
+        --profile-size: clamp(112px, 11vw, 150px);
+        width: var(--profile-size);
+        height: var(--profile-size);
+        flex: 0 0 var(--profile-size);
+        position: relative;
+        margin: 88px 0 28px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+        animation: fadeUp 0.8s 0.1s forwards;
+        isolation: isolate;
+      }
+      .hero-profile::before {
+        content: "";
+        position: absolute;
+        inset: -5px;
+        border-radius: inherit;
+        background: conic-gradient(
+          from 135deg,
+          transparent,
+          rgba(201, 169, 110, 0.35),
+          var(--gold-light),
+          rgba(201, 169, 110, 0.2),
+          transparent
+        );
+        animation: spin-ring 14s linear infinite;
+        z-index: -1;
+      }
+      .hero-profile::after {
+        content: "";
+        position: absolute;
+        inset: -22px;
+        border-radius: inherit;
+        background: radial-gradient(
+          circle,
+          rgba(201, 169, 110, 0.2),
+          transparent 62%
+        );
+        filter: blur(4px);
+        z-index: -2;
+      }
+      .hero-profile img {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        object-fit: cover;
+        object-position: 50% 20%;
+        border: 1px solid rgba(232, 201, 138, 0.55);
+        box-shadow:
+          0 0 0 10px rgba(8, 8, 8, 0.78),
+          0 22px 55px rgba(0, 0, 0, 0.45);
+        filter: saturate(0.95) contrast(1.04);
+      }
+      .hero-profile:hover img {
+        border-color: var(--gold-light);
       }
 
       .hero-eyebrow {
@@ -473,6 +541,27 @@
           transparent 60%
         );
       }
+      .card-swiga::before {
+        background: radial-gradient(
+          circle at 30% 50%,
+          var(--swiga-dim),
+          transparent 60%
+        );
+      }
+      .card-bricoram::before {
+        background: radial-gradient(
+          circle at 70% 50%,
+          var(--bricoram-dim),
+          transparent 60%
+        );
+      }
+      .card-change::before {
+        background: radial-gradient(
+          circle at 30% 50%,
+          var(--change-dim),
+          transparent 60%
+        );
+      }
       .app-card:hover::before {
         opacity: 1;
       }
@@ -521,6 +610,18 @@
       .tag-pass {
         border-color: rgba(201, 169, 110, 0.4);
         color: var(--pass);
+      }
+      .tag-swiga {
+        border-color: rgba(163, 230, 53, 0.4);
+        color: var(--swiga);
+      }
+      .tag-bricoram {
+        border-color: rgba(244, 63, 94, 0.4);
+        color: var(--bricoram);
+      }
+      .tag-change {
+        border-color: rgba(34, 211, 238, 0.4);
+        color: var(--change);
       }
 
       .app-name {
@@ -580,6 +681,15 @@
       }
       .feat-pass li::before {
         background: var(--pass);
+      }
+      .feat-swiga li::before {
+        background: var(--swiga);
+      }
+      .feat-bricoram li::before {
+        background: var(--bricoram);
+      }
+      .feat-change li::before {
+        background: var(--change);
       }
 
       .app-links {
@@ -1260,6 +1370,151 @@
         text-transform: uppercase;
       }
 
+      .download-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 8px 16px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .badge-swiga {
+        color: var(--swiga);
+        background: rgba(163, 230, 53, 0.08);
+        border: 1px solid rgba(163, 230, 53, 0.3);
+      }
+      .badge-bricoram {
+        color: var(--bricoram);
+        background: rgba(244, 63, 94, 0.08);
+        border: 1px solid rgba(244, 63, 94, 0.3);
+      }
+      .badge-change {
+        color: var(--change);
+        background: rgba(34, 211, 238, 0.08);
+        border: 1px solid rgba(34, 211, 238, 0.3);
+      }
+      .badge-pass {
+        color: var(--pass);
+        background: rgba(201, 169, 110, 0.08);
+        border: 1px solid rgba(201, 169, 110, 0.3);
+      }
+
+      .market-visual,
+      .service-visual,
+      .currency-visual {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .market-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 82px);
+        gap: 12px;
+        position: relative;
+        z-index: 1;
+      }
+      .market-tile {
+        height: 76px;
+        border: 1px solid rgba(163, 230, 53, 0.25);
+        background: rgba(163, 230, 53, 0.05);
+        display: grid;
+        place-items: center;
+        color: var(--swiga);
+        animation: float-metric 5s ease-in-out infinite;
+      }
+      .market-tile:nth-child(2),
+      .market-tile:nth-child(5) {
+        animation-delay: 1s;
+      }
+      .market-tile:nth-child(3),
+      .market-tile:nth-child(4) {
+        animation-delay: 2s;
+      }
+      .market-tile svg {
+        width: 28px;
+        height: 28px;
+        opacity: 0.75;
+      }
+
+      .service-board {
+        display: grid;
+        grid-template-columns: repeat(2, 110px);
+        gap: 14px;
+        position: relative;
+        z-index: 1;
+      }
+      .service-tile {
+        min-height: 92px;
+        border: 1px solid rgba(244, 63, 94, 0.24);
+        background: rgba(244, 63, 94, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--bricoram);
+        font-family: "DM Mono", monospace;
+        font-size: 0.55rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .service-tile svg {
+        width: 28px;
+        height: 28px;
+      }
+      .service-link {
+        position: absolute;
+        width: 2px;
+        height: 170px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(244, 63, 94, 0.45),
+          transparent
+        );
+        animation: routeFlow 3s infinite;
+      }
+      .service-link.l1 {
+        transform: rotate(45deg);
+      }
+      .service-link.l2 {
+        transform: rotate(-45deg);
+        animation-delay: 1.2s;
+      }
+
+      .rate-panel {
+        width: min(320px, 72%);
+        border: 1px solid rgba(34, 211, 238, 0.28);
+        background: rgba(34, 211, 238, 0.05);
+        padding: 22px;
+        position: relative;
+        z-index: 1;
+      }
+      .rate-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(34, 211, 238, 0.14);
+        font-family: "DM Mono", monospace;
+        color: var(--change);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+      }
+      .rate-row:last-child {
+        border-bottom: 0;
+      }
+      .rate-arrow {
+        color: rgba(240, 235, 227, 0.35);
+      }
+
       .client-badge {
         display: inline-flex;
         align-items: center;
@@ -1272,7 +1527,7 @@
         margin-bottom: 18px;
       }
       .client-badge::before {
-        content: "Client";
+        content: "With";
         padding: 3px 8px;
         border: 1px solid var(--border);
         color: var(--gold);
@@ -1392,6 +1647,11 @@
         .app-card-info {
           padding: 50px 30px;
         }
+        .hero-profile {
+          --profile-size: 112px;
+          margin-top: 72px;
+          margin-bottom: 24px;
+        }
         .about {
           grid-template-columns: 1fr;
           padding: 80px 24px;
@@ -1433,6 +1693,9 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-bg-circle"></div>
+      <div class="hero-profile">
+        <img src="logo.PNG" alt="Portrait of Youcef Mhammdi Bouzina" />
+      </div>
       <p class="hero-eyebrow">— Mobile App Developer &amp; Product Engineer</p>
       <h1 class="hero-title">
         <span class="line1">Crafting</span>
@@ -1440,9 +1703,10 @@
         <span class="line3">Experiences</span>
       </h1>
       <p class="hero-desc">
-        I build refined, purposeful applications for ambitious clients — from
-        ride-hailing platforms and travel guides to AI health companions and
-        Swiss-grade security tools.
+        I build production-ready mobile and web products that integrate AI and
+        agentic AI seamlessly into real workflows — from Algerian marketplaces
+        and on-demand services to travel, mobility, health, and security
+        platforms.
       </p>
       <div class="hero-cta">
         <a href="#works" class="btn-gold">View My Work</a>
@@ -1457,15 +1721,15 @@
     <!-- STATS BAR -->
     <div class="stats-bar" id="stats">
       <div class="stat-item">
-        <div class="stat-num">4</div>
+        <div class="stat-num">7</div>
         <div class="stat-label">Apps Launched</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">100k</div>
-        <div class="stat-label">Users Reached</div>
+        <div class="stat-num">1.6M+</div>
+        <div class="stat-label">Downloads Reached</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">4</div>
+        <div class="stat-num">7</div>
         <div class="stat-label">Industries</div>
       </div>
       <div class="stat-item">
@@ -1478,6 +1742,15 @@
     <div class="marquee-wrap">
       <div class="marquee-track">
         <span class="marquee-item"
+          >Algerian Marketplace<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >On-Demand Services<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Dinar Exchange<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
           >Algeria Travel Guide<span class="marquee-dot"></span
         ></span>
         <span class="marquee-item"
@@ -1487,12 +1760,15 @@
           >AI Health<span class="marquee-dot"></span
         ></span>
         <span class="marquee-item"
+          >Agentic AI<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
           >Cybersecurity<span class="marquee-dot"></span
         ></span>
         <span class="marquee-item"
           >iOS Development<span class="marquee-dot"></span
         ></span>
-        <span class="marquec-item"
+        <span class="marquee-item"
           >Android Development<span class="marquee-dot"></span
         ></span>
         <span class="marquee-item"
@@ -1502,6 +1778,15 @@
           >Swiss Engineering<span class="marquee-dot"></span
         ></span>
         <span class="marquee-item"
+          >Algerian Marketplace<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >On-Demand Services<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Dinar Exchange<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
           >Algeria Travel Guide<span class="marquee-dot"></span
         ></span>
         <span class="marquee-item"
@@ -1509,6 +1794,9 @@
         ></span>
         <span class="marquee-item"
           >AI Health<span class="marquee-dot"></span
+        ></span>
+        <span class="marquee-item"
+          >Agentic AI<span class="marquee-dot"></span
         ></span>
         <span class="marquee-item"
           >Cybersecurity<span class="marquee-dot"></span
@@ -1532,14 +1820,152 @@
     <section class="works" id="works">
       <div class="works-header">
         <div>
-          <div class="section-label">Client Work</div>
+          <div class="section-label">Selected Work</div>
           <h2 class="works-title">Featured<br /><em>Applications</em></h2>
         </div>
-        <span class="works-count">004 Projects</span>
+        <span class="works-count">007 Projects · Ranked by downloads</span>
+      </div>
+
+      <!-- SWIGA -->
+      <div class="app-card card-swiga" data-downloads="1000000">
+        <div class="app-card-info">
+          <div class="app-index">01 / 07</div>
+          <div class="client-badge">Swiga App</div>
+          <span class="app-category-tag tag-swiga">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              width="12"
+              height="12"
+            >
+              <path d="M6 2l1.2 4M18 2l-1.2 4" />
+              <path d="M4 6h16l-1.5 16h-13L4 6z" />
+              <path d="M8 10h8" />
+            </svg>
+            Marketplace
+          </span>
+          <h3 class="app-name">Swiga<br />Marketplace</h3>
+          <p class="app-desc">
+            Algeria's high-volume buy, sell, and swap marketplace. Swiga gives
+            sellers simple listing flows and gives buyers access to thousands
+            of daily offers, auctions, and local deals without commission.
+          </p>
+          <ul class="app-features feat-swiga">
+            <li>1M+ Google Play downloads and 111k+ reviews</li>
+            <li>Marketplace for new, secondhand, and commercial products</li>
+            <li>Free listings, seller profiles, and buyer discovery flows</li>
+            <li>Online auction feature for time-bound bidding</li>
+            <li>Available on iOS &amp; Android</li>
+          </ul>
+          <div class="app-links">
+            <a
+              href="https://apps.apple.com/dz/app/swiga-%D8%B3%D9%88%D9%8A%D9%82%D8%A9/id6450626159"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                />
+              </svg>
+              App Store
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.swiga.swiga"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M3.18 23.76c.3.17.66.19.99.04l13.18-7.61-2.89-2.89-11.28 10.46zM.5 1.29C.19 1.65 0 2.19 0 2.9v18.2c0 .71.19 1.25.51 1.6l.08.08 10.19-10.19v-.24L.58 1.21l-.08.08zM20.37 10.43l-2.76-1.59-3.23 3.23 3.23 3.23 2.77-1.6c.79-.46.79-1.22-.01-1.68l-.0-.59zM3.18.24L16.36 7.85 13.47 10.74 2.19.28C2.52.12 2.88.07 3.18.24z"
+                />
+              </svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+        <div class="app-card-visual">
+          <div class="market-visual">
+            <div class="download-badge badge-swiga">1M+ Downloads</div>
+            <div class="market-grid">
+              <div class="market-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M6 2l1.2 4M18 2l-1.2 4" />
+                  <path d="M4 6h16l-1.5 16h-13L4 6z" />
+                </svg>
+              </div>
+              <div class="market-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M20.6 13.4L13.4 20.6a2 2 0 01-2.8 0L3 13.9V4h9.9l7.7 7.6a2 2 0 010 2.8z" />
+                  <circle cx="8" cy="8" r="1.5" />
+                </svg>
+              </div>
+              <div class="market-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M3 12h18" />
+                  <path d="M7 7l-4 5 4 5" />
+                  <path d="M17 7l4 5-4 5" />
+                </svg>
+              </div>
+              <div class="market-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M4 19V8a2 2 0 012-2h12a2 2 0 012 2v11" />
+                  <path d="M8 6V4h8v2" />
+                  <path d="M3 19h18" />
+                </svg>
+              </div>
+              <div class="market-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <circle cx="9" cy="19" r="1.5" />
+                  <circle cx="17" cy="19" r="1.5" />
+                  <path d="M2 3h3l2.4 11.2a2 2 0 002 1.6h8.3a2 2 0 001.9-1.4L21 7H6" />
+                </svg>
+              </div>
+              <div class="market-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M12 3v18" />
+                  <path d="M6 8h10a3 3 0 010 6H8a3 3 0 000 6h10" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- DUKS MAPS -->
-      <div class="app-card card-duks">
+      <div class="app-card card-duks" data-downloads="500000">
         <div class="app-card-visual">
           <div class="duks-visual">
             <div class="terrain-lines">
@@ -1561,7 +1987,7 @@
               <div class="pin-dot"></div>
               <span class="pin-label">Tipaza</span>
             </div>
-            <div class="users-badge">100 000+ Users</div>
+            <div class="users-badge">500K+ Downloads</div>
             <div class="compass-wrap">
               <div class="compass-outer">
                 <div
@@ -1607,7 +2033,7 @@
           </div>
         </div>
         <div class="app-card-info">
-          <div class="app-index">01 / 04</div>
+          <div class="app-index">02 / 07</div>
           <div class="client-badge">Boulouza Nasser</div>
           <span class="app-category-tag tag-duks">
             <svg
@@ -1637,7 +2063,7 @@
             </li>
             <li>Offline-ready maps for remote exploration</li>
             <li>Insider guides by Duks — Algeria's top travel influencer</li>
-            <li>4.9★ rating · 418 reviews · 100 000+ active users</li>
+            <li>4.9★ rating · 12k+ reviews · 500k+ downloads</li>
             <li>Available on iOS &amp; Android</li>
           </ul>
           <div class="app-links">
@@ -1654,7 +2080,7 @@
               App Store
             </a>
             <a
-              href="https://play.google.com/store/apps/details?id=com.duks.app&hl=fr"
+              href="https://play.google.com/store/apps/details?id=com.duks.app&amp;hl=fr"
               target="_blank"
               class="store-btn"
             >
@@ -1669,10 +2095,207 @@
         </div>
       </div>
 
-      <!-- FITRIGI -->
-      <div class="app-card card-fitrigi">
+      <!-- BRICORAM -->
+      <div class="app-card card-bricoram" data-downloads="100000">
+        <div class="app-card-visual">
+          <div class="service-visual">
+            <div class="download-badge badge-bricoram">100K+ Downloads</div>
+            <div class="service-link l1"></div>
+            <div class="service-link l2"></div>
+            <div class="service-board">
+              <div class="service-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M14.7 6.3a3 3 0 104 4L10 19l-4 1 1-4 8.7-8.7z" />
+                </svg>
+                Repair
+              </div>
+              <div class="service-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M3 21h18" />
+                  <path d="M5 21V8l7-5 7 5v13" />
+                  <path d="M9 21v-7h6v7" />
+                </svg>
+                Home
+              </div>
+              <div class="service-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M3 7h18" />
+                  <path d="M6 7v14h12V7" />
+                  <path d="M9 7V4h6v3" />
+                  <path d="M10 12h4" />
+                  <path d="M10 16h4" />
+                </svg>
+                Jobs
+              </div>
+              <div class="service-tile">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                >
+                  <path d="M21 15a4 4 0 01-4 4H7l-4 3V7a4 4 0 014-4h10a4 4 0 014 4z" />
+                </svg>
+                Chat
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="app-card-info">
-          <div class="app-index">02 / 04</div>
+          <div class="app-index">03 / 07</div>
+          <div class="client-badge">Bricoram Team</div>
+          <span class="app-category-tag tag-bricoram">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              width="12"
+              height="12"
+            >
+              <path d="M14.7 6.3a3 3 0 104 4L10 19l-4 1 1-4 8.7-8.7z" />
+            </svg>
+            On-Demand Services
+          </span>
+          <h3 class="app-name">Bricoram</h3>
+          <p class="app-desc">
+            Part of the team building Bricoram, Algeria's on-demand handyman
+            services platform. The product connects households with trusted
+            professionals across repair, construction, moving, childcare,
+            nursing, and dozens of local service categories.
+          </p>
+          <ul class="app-features feat-bricoram">
+            <li>100K+ Google Play downloads and 1.6k+ reviews</li>
+            <li>Service request publishing in under five minutes</li>
+            <li>Professional profiles, ratings, offers, and price comparison</li>
+            <li>Instant chat between customers and service providers</li>
+            <li>Web and Android platform for the Algerian services market</li>
+          </ul>
+          <div class="app-links">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.dict.bricoram"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M3.18 23.76c.3.17.66.19.99.04l13.18-7.61-2.89-2.89-11.28 10.46zM.5 1.29C.19 1.65 0 2.19 0 2.9v18.2c0 .71.19 1.25.51 1.6l.08.08 10.19-10.19v-.24L.58 1.21l-.08.08zM20.37 10.43l-2.76-1.59-3.23 3.23 3.23 3.23 2.77-1.6c.79-.46.79-1.22-.01-1.68l-.0-.59zM3.18.24L16.36 7.85 13.47 10.74 2.19.28C2.52.12 2.88.07 3.18.24z"
+                />
+              </svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHANGE DINAR -->
+      <div class="app-card card-change" data-downloads="20000">
+        <div class="app-card-info">
+          <div class="app-index">04 / 07</div>
+          <div class="client-badge">Ayoub Benderdouch</div>
+          <span class="app-category-tag tag-change">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              width="12"
+              height="12"
+            >
+              <path d="M12 2v20" />
+              <path d="M17 5H9.5a3.5 3.5 0 000 7H14a3.5 3.5 0 010 7H6" />
+            </svg>
+            Finance
+          </span>
+          <h3 class="app-name">Change<br />Dinar</h3>
+          <p class="app-desc">
+            Currency exchange companion for Algerian Dinar rates. The app helps
+            Algerians, travelers, students, entrepreneurs, and the diaspora
+            track parallel-market, official, digital-bank, and gold pricing in
+            one fast bilingual experience.
+          </p>
+          <ul class="app-features feat-change">
+            <li>20K+ downloads across platforms</li>
+            <li>Real-time DZD rates for EUR, USD, GBP, CAD, CHF, CNY, and TRY</li>
+            <li>Wise, PayPal, Payoneer, Skrill, and Paysera digital rates</li>
+            <li>Currency converter, gold pricing, notifications, and dark mode</li>
+            <li>Available on iOS &amp; Android</li>
+          </ul>
+          <div class="app-links">
+            <a
+              href="https://apps.apple.com/dz/app/change-dinar-taux-dinar-alger/id6742030993"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                />
+              </svg>
+              App Store
+            </a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.zaed.changedinar"
+              target="_blank"
+              class="store-btn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M3.18 23.76c.3.17.66.19.99.04l13.18-7.61-2.89-2.89-11.28 10.46zM.5 1.29C.19 1.65 0 2.19 0 2.9v18.2c0 .71.19 1.25.51 1.6l.08.08 10.19-10.19v-.24L.58 1.21l-.08.08zM20.37 10.43l-2.76-1.59-3.23 3.23 3.23 3.23 2.77-1.6c.79-.46.79-1.22-.01-1.68l-.0-.59zM3.18.24L16.36 7.85 13.47 10.74 2.19.28C2.52.12 2.88.07 3.18.24z"
+                />
+              </svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+        <div class="app-card-visual">
+          <div class="currency-visual">
+            <div class="download-badge badge-change">20K+ Downloads</div>
+            <div class="rate-panel">
+              <div class="rate-row">
+                <span>EUR</span>
+                <span class="rate-arrow">→</span>
+                <span>DZD</span>
+              </div>
+              <div class="rate-row">
+                <span>USD</span>
+                <span class="rate-arrow">→</span>
+                <span>DZD</span>
+              </div>
+              <div class="rate-row">
+                <span>Wise</span>
+                <span class="rate-arrow">→</span>
+                <span>Live</span>
+              </div>
+              <div class="rate-row">
+                <span>Gold</span>
+                <span class="rate-arrow">→</span>
+                <span>24K</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FITRIGI -->
+      <div class="app-card card-fitrigi" data-downloads="22">
+        <div class="app-card-info">
+          <div class="app-index">06 / 07</div>
           <div class="client-badge">Ayoub Benderdouch</div>
           <span class="app-category-tag tag-fitrigi">
             <svg
@@ -1718,7 +2341,7 @@
               App Store
             </a>
             <a
-              href="https://play.google.com/store/apps/details?id=com.fitrigi.Ride&hl=fr"
+              href="https://play.google.com/store/apps/details?id=com.fitrigi.Ride&amp;hl=fr"
               target="_blank"
               class="store-btn"
             >
@@ -1801,7 +2424,7 @@
       </div>
 
       <!-- CALMIRA -->
-      <div class="app-card card-calmira">
+      <div class="app-card card-calmira" data-downloads="0">
         <div class="app-card-visual">
           <div class="calmira-visual">
             <div class="metric-bubble">❤ 72 bpm</div>
@@ -1827,7 +2450,7 @@
           </div>
         </div>
         <div class="app-card-info">
-          <div class="app-index">03 / 04</div>
+          <div class="app-index">07 / 07</div>
           <div class="client-badge">Mohamed Al-Rahawan</div>
           <span class="app-category-tag tag-calmira">
             <svg
@@ -1875,9 +2498,9 @@
       </div>
 
       <!-- PASSSECURIUM -->
-      <div class="app-card card-pass">
+      <div class="app-card card-pass" data-downloads="1000">
         <div class="app-card-info">
-          <div class="app-index">04 / 04</div>
+          <div class="app-index">05 / 07</div>
           <div class="client-badge">Alpeinsoft · Switzerland</div>
           <span class="app-category-tag tag-pass">
             <svg
@@ -1900,11 +2523,11 @@
             Switzerland is known for.
           </p>
           <ul class="app-features feat-pass">
+            <li>1k+ Google Play downloads</li>
             <li>Military-grade encryption &amp; Swiss security standards</li>
             <li>Secure password generation &amp; autofill</li>
             <li>Encrypted vault with zero-knowledge architecture</li>
             <li>Cross-platform: iOS &amp; Android</li>
-            <li>Developed by Alpeinsoft, Switzerland</li>
           </ul>
           <div class="app-links">
             <a
@@ -1920,7 +2543,7 @@
               App Store
             </a>
             <a
-              href="https://play.google.com/store/apps/details?id=ch.alpeinsoft.passsecurium.abo&hl=fr"
+              href="https://play.google.com/store/apps/details?id=ch.alpeinsoft.passsecurium.abo&amp;hl=fr"
               target="_blank"
               class="store-btn"
             >
@@ -1936,6 +2559,7 @@
         <div class="app-card-visual">
           <div class="pass-visual">
             <div class="shield-bg"></div>
+            <div class="download-badge badge-pass">1K+ Downloads</div>
             <div class="swiss-cross">
               <div class="swiss-h"></div>
               <div class="swiss-v"></div>
@@ -2017,10 +2641,12 @@
     <!-- TECH BAR -->
     <div class="tech-bar">
       <span class="tech-label">Stack —</span>
-      <span class="tech-tag">React js</span>
+      <span class="tech-tag">React.js</span>
       <span class="tech-tag">Flutter</span>
-      <span class="tech-tag">Nest js </span>
-      <span class="tech-tag">python ML , LLM</span>
+      <span class="tech-tag">NestJS</span>
+      <span class="tech-tag">Python ML &amp; LLM</span>
+      <span class="tech-tag">Agentic AI</span>
+      <span class="tech-tag">LLM Orchestration</span>
       <span class="tech-tag">Node.js</span>
       <span class="tech-tag">Firebase</span>
       <span class="tech-tag">Google Maps API</span>
@@ -2036,13 +2662,21 @@
           I'm Youcef Mhammdi Bouzina — a mobile developer who turns ambitious
           ideas into polished, production-ready applications. I work with
           founders and entrepreneurs to bring their vision to life across iOS
-          and Android.
+          and Android, with AI and agentic AI integrated directly into the
+          product experience when they can create real leverage.
         </p>
         <p class="about-text">
-          From guiding 100k explorers across Algeria with Duks Maps, to powering
-          rides with Fitrigi, supporting patients with Calmira, and locking down
-          digital security with Swiss-made PassSecurium — each project is built
-          with precision and purpose.
+          From scaling marketplace and service platforms like Swiga and
+          Bricoram, to guiding explorers with Duks Maps, powering rides with
+          Fitrigi, supporting patients with Calmira, and locking down digital
+          security with Swiss-made PassSecurium — each project is built with
+          precision and purpose.
+        </p>
+        <p class="about-text">
+          I design AI layers that feel native to the workflow: LLM-powered
+          insights, secure assistants, automation pipelines, and agentic systems
+          that coordinate backend actions without making the product feel
+          bolted together.
         </p>
         <a
           href="#contact"
@@ -2094,13 +2728,13 @@
           </div>
         </div>
         <div class="skill-row">
-          <span class="skill-name">AI Integration</span>
+          <span class="skill-name">AI &amp; Agentic AI Integration</span>
           <div class="skill-level">
             <div class="dot filled"></div>
             <div class="dot filled"></div>
             <div class="dot filled"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
           </div>
         </div>
       </div>
@@ -2120,7 +2754,7 @@
     <!-- FOOTER -->
     <footer>
       <div class="footer-brand">Youcef Mhammdi Bouzina</div>
-      <div class="footer-copy">© 2025 — All rights reserved</div>
+      <div class="footer-copy">© 2026 — All rights reserved</div>
     </footer>
 
     <script>
@@ -2146,6 +2780,22 @@
         requestAnimationFrame(animateCursor);
       }
       animateCursor();
+
+      // Keep the work section ranked by the latest known download counts.
+      const worksSection = document.getElementById("works");
+      const projectCards = [...worksSection.querySelectorAll(".app-card")];
+      projectCards
+        .sort(
+          (a, b) =>
+            Number(b.dataset.downloads || 0) - Number(a.dataset.downloads || 0),
+        )
+        .forEach((card, i) => {
+          worksSection.appendChild(card);
+          const index = card.querySelector(".app-index");
+          if (index) {
+            index.textContent = `${String(i + 1).padStart(2, "0")} / ${String(projectCards.length).padStart(2, "0")}`;
+          }
+        });
 
       document
         .querySelectorAll("a, button, .store-btn, .btn-gold, .btn-ghost")
